@@ -8,19 +8,17 @@ const Elevator = ({ elevatorId }) => {
     const elevators = useSelector((state) => state.elevator.elevators);
     const elevator = elevators.find((el) => el.id === elevatorId);
 
-    // Состояние для блока-индикатора для текущего лифта
     const [indicatorPosition, setIndicatorPosition] = useState(0);
 
     const handleMove = (targetFloor) => {
         dispatch(moveElevator({ elevatorId, targetFloor }));
 
-        // Обновляем состояние блока-индикатора напрямую
         if (targetFloor > elevator.position) {
-            setIndicatorPosition(-20); // Move the square indicator up
+            setIndicatorPosition(-20);
         } else if (targetFloor < elevator.position) {
-            setIndicatorPosition(20); // Move the square indicator down
+            setIndicatorPosition(20);
         } else {
-            setIndicatorPosition(0); // Keep the indicator in place if targetFloor === elevatorPosition
+            setIndicatorPosition(0);
         }
 
         setTimeout(() => {
@@ -48,7 +46,6 @@ const Elevator = ({ elevatorId }) => {
                     ▼
                 </button>
             </div>
-            {/* Добавляем отдельный блок-индикатор для каждого лифта */}
             <div className="square" style={{ marginTop: indicatorPosition }}>
                 <img className="elevatorimage" src={elevatorLift} alt=""/>
             </div>
